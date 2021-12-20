@@ -1,0 +1,12 @@
+
+user : stpham
+pass : mWAp4PhVCHdZ
+
+Pour lancer Mysql en ligne de commande :
+
+/disks/appli/mysql/bin/mysql -D tung -u tung -p
+passwd: 8mQt4rGyzuzg
+
+Jwt
+front: cripter mdp avant de l'envoyer au back
+back: recuperer user avec login fourni, cripter mdp et verifier que mdp de user est bon.

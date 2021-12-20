@@ -1,0 +1,16 @@
+import { Module } from '@nestjs/common';
+import { UploadService } from './upload.service';
+import { UploadController } from './upload.controller';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path/posix';
+import { MulterModule } from '@nestjs/platform-express';
+@Module({
+  imports: [
+    ServeStaticModule.forRoot
+    ({rootPath: join(__dirname, '..', 'download/file-uploaded')}),
+    //MulterModule.register({dest: '../download'})
+  ],
+  providers: [UploadService],
+  controllers: [UploadController]
+})
+export class UploadModule {}
