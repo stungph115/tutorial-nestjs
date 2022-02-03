@@ -10,6 +10,8 @@ import { AllExceptionsFilter } from './filter/all-exeception-filter';
 import { APP_FILTER } from '@nestjs/core';
 import { UploadModule } from './upload/upload.module';
 import { UploadExpModule } from './upload-exp/upload-exp.module';
+import { LogController } from './log/log.controller';
+import { LogModule } from './log/log.module';
 
 @Module({
   imports: [
@@ -53,6 +55,8 @@ import { UploadExpModule } from './upload-exp/upload-exp.module';
   UploadModule,
 
   UploadExpModule,
+
+  LogModule,
   
 
 

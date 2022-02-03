@@ -28,6 +28,18 @@ export class UserController {
   }
 
   @UseGuards(AuthGuard('jwt'))
+  @Get('user')
+  async getUserUser(): Promise<any> {
+    return await this.userService.getUserUser();
+  }
+  
+  @UseGuards(AuthGuard('jwt'))
+  @Get('admin')
+  async getUserAdmin(): Promise<any> {
+    return await this.userService.getUserAdmin();
+  }
+
+  @UseGuards(AuthGuard('jwt'))
   @Get(':id')
   async getUserById(@Param('id') id: number): Promise<any> {
     return await this.userService.getUserById(id);

@@ -21,7 +21,7 @@ export class UserService {
             where : {username:username}
         })
     }
-
+    //get all user
     async getUser(): Promise<User[]> {
         console.log('getUser')
         /* return new Promise((resolve, reject)=>{
@@ -33,6 +33,33 @@ export class UserService {
             }
         })
     }
+    //get user
+    async getUserUser(): Promise<User[]> {
+        console.log('getUser')
+  
+        return await getConnection('tutorial').getRepository(User).find({
+            where:{
+                role:'user'
+            },
+            order: {
+                id:'ASC'
+            }
+        })
+    }
+    //get admin
+    async getUserAdmin(): Promise<User[]> {
+        console.log('getUser')
+
+        return await getConnection('tutorial').getRepository(User).find({
+            where:{
+                role:'admin'
+            },
+            order: {
+                id:'ASC'
+            }
+        })
+    }
+
     async getUserById(id:number): Promise<User> {
         console.log('getUserById')
         /* return new Promise((resolve, reject)=>{
