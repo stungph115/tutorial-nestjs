@@ -45,9 +45,9 @@ export class LogService {
       //  console.log('getUsers')
         return await getConnection('serverDev')
                     .query(`
-                    select distinct id_user 
-                    from logs
-                    where  (event='update' or event='insert' or event='delete')     
+                    select distinct id_user, nom_com 
+                    from logs, commercial
+                    where logs.id_user=commercial.id_com and (event='update' or event='insert' or event='delete')     
                     `)
       }
       async getDetailLog(params: any): Promise<Log[]>{
