@@ -10,21 +10,21 @@ import { FileLib } from 'src/shared/lib/file';
 @Injectable()
 export class UploadExpService {
     constructor(
-        @InjectConnection("tutorial")
+        @InjectConnection("local")
         @InjectRepository(File)
         private fileRepository: Repository<File>,
         private file: FileLib
     ){}
     async GetFileListing(): Promise<File[]>{
         console.log('get file')
-        return await getConnection('tutorial').getRepository(File).find({
+        return await getConnection('local').getRepository(File).find({
             order:{
                 num:'ASC'
             }
         })
     }
     async insertFile(filename:string, ca:string, title: string, username: string ): Promise<any>{
-        const rest = await getConnection("tutorial")
+        const rest = await getConnection("local")
                             .createQueryBuilder()
                             .insert()
                             .into(File)
@@ -52,11 +52,11 @@ export class UploadExpService {
                     console.log('deleting')
                     const res = await this.file.unlinkFile(directoryPath)
                     if(!res){
-                        let fileToDelete= await getConnection('tutorial')
+                        let fileToDelete= await getConnection('local')
                         .getRepository(File).findOne({
                             where: {file:file}
                         })
-                        const res = await getConnection('tutorial')
+                        const res = await getConnection('local')
                                         .getRepository(File)
                                         .remove(fileToDelete) 
                         return await this.GetFileListing()

@@ -7,14 +7,14 @@ import { from } from 'rxjs';
 export class ContactService {
   list: Contact[] = [];
   constructor(
-        @InjectConnection('tutorial')
+        @InjectConnection('local')
         @InjectRepository(Contact)
         private contactRepository: Repository<Contact>
   ) {}
 
   async getContact(): Promise<Contact[]> {
     console.log('getContact');
-    return await getConnection('tutorial').getRepository(Contact).find({
+    return await getConnection('local').getRepository(Contact).find({
       order: {
         id: 'ASC'
       }
@@ -23,7 +23,7 @@ export class ContactService {
 
   async getContactById(id: number): Promise<Contact> {
     console.log('getContactById');
-    return await getConnection('tutorial').getRepository(Contact).findOne({
+    return await getConnection('local').getRepository(Contact).findOne({
       where: {
         id:id
       }
@@ -31,7 +31,7 @@ export class ContactService {
   }
 
   async deleteContact(id: number): Promise<any> {
-  const res = await getConnection("tutorial")
+  const res = await getConnection("local")
                     .createQueryBuilder()
                     .delete()
                     .from(Contact)
@@ -41,7 +41,7 @@ export class ContactService {
   }
 
   async insertContact(contact: Contact): Promise<any> {
-    const res = await getConnection("tutorial")
+    const res = await getConnection("local")
                       .createQueryBuilder()
                       .insert()
                       .into(Contact)
@@ -53,7 +53,7 @@ export class ContactService {
 
   async updateContact(params: Contact): Promise<any> {
     console.log(params.id);
-    const res = await getConnection("tutorial")
+    const res = await getConnection("local")
                       .createQueryBuilder()
                       .update(Contact)
                       .set(params)

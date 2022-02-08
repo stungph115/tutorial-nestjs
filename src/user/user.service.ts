@@ -10,14 +10,14 @@ import { sha256 } from 'js-sha256';
 export class UserService {
 
     constructor(
-        @InjectConnection("tutorial")
+        @InjectConnection("local")
         @InjectRepository(User)
         private userRepository: Repository<User>
     ){}
     
     //Find user by username
     async getInfo(username : string): Promise<User> {
-        return await getConnection('tutorial').getRepository(User).findOne({
+        return await getConnection('local').getRepository(User).findOne({
             where : {username:username}
         })
     }
@@ -27,7 +27,7 @@ export class UserService {
         /* return new Promise((resolve, reject)=>{
             resolve(this.list)
         }) */
-        return await getConnection('tutorial').getRepository(User).find({
+        return await getConnection('local').getRepository(User).find({
             order: {
                 id:'ASC'
             }
@@ -37,7 +37,7 @@ export class UserService {
     async getUserUser(): Promise<User[]> {
         console.log('getUser')
   
-        return await getConnection('tutorial').getRepository(User).find({
+        return await getConnection('local').getRepository(User).find({
             where:{
                 role:'user'
             },
@@ -50,7 +50,7 @@ export class UserService {
     async getUserAdmin(): Promise<User[]> {
         console.log('getUser')
 
-        return await getConnection('tutorial').getRepository(User).find({
+        return await getConnection('local').getRepository(User).find({
             where:{
                 role:'admin'
             },
@@ -70,7 +70,7 @@ export class UserService {
             }
             resolve(list);
         }) */
-        return await getConnection('tutorial').getRepository(User).findOne({
+        return await getConnection('local').getRepository(User).findOne({
             where: {
                 id:id
             }
@@ -94,13 +94,13 @@ export class UserService {
         })*/
         // const list = await this.getUser()
         // return {status:200, list:list}
-        let userToDelete= await getConnection('tutorial')
+        let userToDelete= await getConnection('local')
                                 .getRepository(User).findOne({
                                     where: {
                                         id:id
                                     }
                                 })
-        const res = await getConnection('tutorial')
+        const res = await getConnection('local')
                     .getRepository(User)
                     .remove(userToDelete) 
         return await this.getUser()
@@ -112,7 +112,7 @@ export class UserService {
     async insertUser(user:User): Promise<any>{
         //chiffrer le mdp en sha 256
         user.password = sha256(user.password).toString();
-                const res = await getConnection('tutorial')
+                const res = await getConnection('local')
                     .getRepository(User)
                     .save(user)
                     
@@ -130,21 +130,21 @@ export class UserService {
             }
         })*/
 
-        let userToUpdate = await getConnection('tutorial')
+        let userToUpdate = await getConnection('local')
                                 .getRepository(User).findOne({
                                     where: {
                                         id:params.id
                                     }
                                 })
          userToUpdate = params;
-         const res= await getConnection('tutorial')
+         const res= await getConnection('local')
                      .getRepository(User)
                      .save(userToUpdate);
                      return await this.getUser()
     }
 
     async insertUserPhoto(filename: string, username: string): Promise<any>{
-        const rest = await getConnection("tutorial")
+        const rest = await getConnection("local")
                             .createQueryBuilder()
                             .update(User)
                             .set({photoProfile:filename})

@@ -11,16 +11,16 @@ export class Log {
     id_user: number
 
     @Column()
-    CA: string
+    ca: string
 
     @Column()
-    Event: string
+    event: string
 
     @Column()
     id_fiche: number
     
     @Column()
-    Query: string
+    query: string
 
     @Column()
     route: string
@@ -29,6 +29,32 @@ export class Log {
     method: string
 
 
+
+}        
+
+
+@Entity({name: 'commercial'})
+export class Commercial {
+    @PrimaryGeneratedColumn()
+    id_com: number
+
+    @Column()
+    id_equipe: Date
+
+    @Column()
+    nom_com: string
+
+    @Column()
+    prenom_com: string
+
+    @Column()
+    tel: number
+
+    @Column()
+    fax: number
+    
+    @Column()
+    email: string
 
 }
 

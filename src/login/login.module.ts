@@ -12,7 +12,7 @@ import { JwtAuthGuard } from './jwt-auth.guard';
   controllers: [LoginController],
   imports:[
     PassportModule,
-    TypeOrmModule.forFeature([User], "tutorial"),
+    TypeOrmModule.forFeature([User], "local"),
     JwtModule.register({
       secret: jwtConstants.secret,
       signOptions: { expiresIn: 3600 },

@@ -17,25 +17,9 @@ import { LogModule } from './log/log.module';
   imports: [
   UserModule, 
   ContactModule,
-  TypeOrmModule.forRoot({
-
-    // BDD à distance
-    //------------------------------------------------------
-    //name:"tutorial",
-   // database: "tung",
-   // type: "mysql",
-   // synchronize:  false,
-    //logging : true,
-    //host: '10.0.1.233',
-  //  port: 3306,
-  //  username: 'tung',
- //   password: '8mQt4rGyzuzg',
-  //  charset: "utf8mb4_unicode_ci",
-   // entities: [__dirname + '/**/*.entity{.ts,.js}'],
-
-    // BDD locale
-    //------------------------------------------------------
-   name:"tutorial",
+  TypeOrmModule.forRoot(
+    {
+   name:"local",
    database: "tutorial",
    type: "mysql",
    synchronize:  false,
@@ -46,22 +30,26 @@ import { LogModule } from './log/log.module';
    password: '',
    charset: "utf8mb4_unicode_ci",
    entities: [__dirname + '/**/*.entity{.ts,.js}'],
-
-
+  }
+  ),
+  TypeOrmModule.forRoot({
+    // BDD à distance
+    name:"serverDev",
+    database: "prospect",
+    type: "mysql",
+    synchronize:  false,
+    logging : true,
+    host: '10.0.1.233',
+    port: 3306,
+    username: 'tung',
+    password: '8mQt4rGyzuzg',
+    charset: "utf8mb4_unicode_ci",
+    entities: [__dirname + '/**/*.entity{.ts,.js}'],
   }),
-
   LoginModule,
-
   UploadModule,
-
   UploadExpModule,
-
   LogModule,
-  
-
-
-  
-
 ],
   controllers: [AppController],
   providers: [AppService,
@@ -69,6 +57,5 @@ import { LogModule } from './log/log.module';
       provide: APP_FILTER,
       useClass: AllExceptionsFilter,
     },],
-  
 })
 export class AppModule {}

@@ -17,14 +17,14 @@ export class LoginService {
     constructor(
         private jwtService: JwtService,
 
-        @InjectConnection("tutorial")
+        @InjectConnection("local")
         @InjectRepository(User)
         private userRepository: Repository<User>
     ){}
    
     async getUser(): Promise<User[]> {
    
-        return await getConnection('tutorial').getRepository(User).find({
+        return await getConnection('local').getRepository(User).find({
             order: {
                 username:'ASC'
             }
@@ -33,7 +33,7 @@ export class LoginService {
     async getUserByUsername(username:string): Promise<User> {
 
        
-        return await getConnection('tutorial').getRepository(User).findOne({
+        return await getConnection('local').getRepository(User).findOne({
             where: {
                 username:username
             }
@@ -42,7 +42,7 @@ export class LoginService {
    
     async login(params:any): Promise<any> {
 
-        const user = await getConnection('tutorial').getRepository(User).findOne({
+        const user = await getConnection('local').getRepository(User).findOne({
             where: {username:params.username}
         });
         console.log("getUserByName")
@@ -73,7 +73,7 @@ export class LoginService {
 
     async validateUser(payload: any) : Promise<boolean> {
         console.log(payload)
-        const user = await getConnection('tutorial').getRepository(User).findOne({
+        const user = await getConnection('local').getRepository(User).findOne({
             where: {id:payload.id}
         })
         if(user.password==payload.password){

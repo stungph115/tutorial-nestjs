@@ -9,7 +9,7 @@ import { JwtStrategy } from 'src/login/jwt.strategy';
   providers: [UserService,],
   controllers: [UserController],
   imports:[
-    TypeOrmModule.forFeature([User], "tutorial")
+    TypeOrmModule.forFeature([User], "local")
     ],
   exports: [UserService]
 })

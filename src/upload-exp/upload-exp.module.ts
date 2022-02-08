@@ -14,7 +14,7 @@ import { UploadExpService } from './upload-exp.service';
     ServeStaticModule.forRoot
     ({rootPath: join(__dirname, '..', 'download/archive-exp')}),
     //MulterModule.register({dest: '../download'})
-    TypeOrmModule.forFeature([File], "tutorial")
+    TypeOrmModule.forFeature([File], "local")
     ],
 })
 export class UploadExpModule {}
